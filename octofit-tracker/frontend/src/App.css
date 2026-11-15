@@ -1,0 +1,263 @@
+/* OctoFit "Liquid Glass" theme.
+   The glass components come from @zakisheriff/liquid-glass; this file supplies the colourful
+   backdrop they refract, plus layout. The library reads data-theme, Bootstrap reads data-bs-theme. */
+:root {
+  --octofit-orb-1: #ff9ec7;
+  --octofit-orb-2: #8fcbff;
+  --octofit-orb-3: #a8ecb9;
+  --octofit-orb-4: #c4b2ff;
+  --octofit-base: #eef3ff;
+  --octofit-title-from: #0a5fd0;
+  --octofit-title-to: #1f9d55;
+  --octofit-stripe: rgb(255 255 255 / 0.32);
+  --octofit-row-hover: rgb(0 136 255 / 0.12);
+  --octofit-rule: rgb(60 60 67 / 0.14);
+  --bs-body-color: var(--lg-fg);
+  --bs-body-color-rgb: 0, 0, 0;
+}
+
+[data-theme='dark'] {
+  --octofit-orb-1: #6b1d52;
+  --octofit-orb-2: #124a8c;
+  --octofit-orb-3: #0d5a43;
+  --octofit-orb-4: #43308f;
+  --octofit-base: #060914;
+  --octofit-title-from: #7fc0ff;
+  --octofit-title-to: #8fe3a5;
+  --octofit-stripe: rgb(255 255 255 / 0.05);
+  --octofit-row-hover: rgb(0 145 255 / 0.18);
+  --octofit-rule: rgb(235 235 245 / 0.14);
+  --bs-body-color-rgb: 255, 255, 255;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  color: var(--lg-fg);
+  background:
+    radial-gradient(60vmax 60vmax at 8% 4%, var(--octofit-orb-1), transparent 62%),
+    radial-gradient(55vmax 55vmax at 96% 12%, var(--octofit-orb-2), transparent 62%),
+    radial-gradient(60vmax 60vmax at 82% 100%, var(--octofit-orb-3), transparent 62%),
+    radial-gradient(50vmax 50vmax at 0% 92%, var(--octofit-orb-4), transparent 62%),
+    var(--octofit-base);
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--lg-fg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.lead,
+.octofit-muted {
+  color: var(--lg-fg-muted) !important;
+}
+
+a {
+  color: var(--lg-accent);
+}
+
+.octofit-title {
+  background: linear-gradient(90deg, var(--octofit-title-from), var(--octofit-title-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h1.octofit-title:not(.h3) {
+  font-size: clamp(2rem, 4vw + 1rem, 3.25rem);
+  line-height: 1.1;
+}
+
+/* Header and navigation */
+.octofit-shell {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+.octofit-header {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.octofit-brand {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+  color: var(--lg-fg);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.octofit-brand:hover {
+  color: var(--lg-fg);
+}
+
+.octofit-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgb(255 255 255 / 0.75);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.25);
+}
+
+.octofit-theme {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: var(--lg-fg-muted);
+}
+
+@media (max-width: 767.98px) {
+  .octofit-header {
+    justify-content: center;
+  }
+
+  .octofit-brand,
+  .octofit-theme {
+    flex: 0 0 auto;
+  }
+
+  .octofit-header > .octofit-nav {
+    order: 3;
+  }
+
+  .octofit-brand {
+    margin-right: auto;
+  }
+}
+
+/* Home */
+.octofit-hero > div:last-child {
+  min-width: 0;
+}
+
+.octofit-hero {
+  display: flex !important;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.octofit-hero-logo {
+  width: 120px;
+  height: 120px;
+  flex: none;
+  object-fit: cover;
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.28);
+}
+
+@media (max-width: 575.98px) {
+  .octofit-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.octofit-feature {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.octofit-feature-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  color: var(--lg-accent);
+  background: var(--lg-fill);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+
+.octofit-feature-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* List panels */
+.octofit-panel {
+  overflow: hidden;
+}
+
+.octofit-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--octofit-rule);
+}
+
+.octofit-panel-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.octofit-search {
+  max-width: 28rem;
+  margin-bottom: 1.25rem;
+}
+
+.octofit-alert {
+  border-radius: 16px;
+}
+
+.octofit-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--lg-fg);
+  --bs-table-striped-color: var(--lg-fg);
+  --bs-table-striped-bg: var(--octofit-stripe);
+  --bs-table-hover-color: var(--lg-fg);
+  --bs-table-hover-bg: var(--octofit-row-hover);
+  --bs-table-border-color: var(--octofit-rule);
+}
+
+.octofit-table > thead th {
+  color: var(--lg-fg-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom-width: 1px;
+}
+
+.octofit-table > tbody > tr > * {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.octofit-table > tbody > tr:last-child > * {
+  border-bottom-width: 0;
+}
+
+.octofit-sheet {
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.octofit-sheet dd {
+  overflow-wrap: anywhere;
+}
+
+.octofit-sheet dt {
+  color: var(--lg-fg-muted);
+}
