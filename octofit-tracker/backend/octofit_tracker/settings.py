@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,16 @@ SECRET_KEY = 'django-insecure-si-)0964zki0p29_-ymt6^awm6qx8e2hz2(0onhov$@)yy@+0w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
+
+# Codespaces forwards port 8000 over HTTPS on this hostname
+_codespace_name = os.environ.get('CODESPACE_NAME')
+if _codespace_name:
+    _codespace_host = f'{_codespace_name}-8000.app.github.dev'
+    ALLOWED_HOSTS.append(_codespace_host)
+    CSRF_TRUSTED_ORIGINS.append(f'https://{_codespace_host}')
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
