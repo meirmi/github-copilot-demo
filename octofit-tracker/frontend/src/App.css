@@ -1,254 +1,168 @@
-/* OctoFit theme layered on top of Bootstrap classes.
-   Palette comes from the mascot: steel blue body, navy shadows, green headphones. */
+/* OctoFit "Liquid Glass" theme.
+   The glass components come from @zakisheriff/liquid-glass; this file supplies the colourful
+   backdrop they refract, plus layout. The library reads data-theme, Bootstrap reads data-bs-theme. */
 :root {
-  --octofit-steel: #4682b4;
-  --octofit-steel-light: #5a9bd4;
-  --octofit-steel-dark: #3a6d99;
-  --octofit-navy: #0b2e6f;
-  --octofit-sky: #f0f8ff;
-  --octofit-green: #6cc24a;
-  --octofit-text: #1f3a52;
-  --octofit-muted: #5b7186;
-  --octofit-heading: var(--octofit-navy);
-  --octofit-heading-end: var(--octofit-steel);
-  --octofit-bg-from: #dcecfb;
-  --octofit-bg-via: var(--octofit-sky);
-  --octofit-bg-to: #e3f6df;
-  --octofit-table-stripe: #eaf4fc;
-  --octofit-table-hover: #d6f5f5;
-  --octofit-table-border: #cfe1f1;
-  --octofit-nav-from: var(--octofit-navy);
-  --octofit-nav-to: var(--octofit-steel);
-  --bs-body-color: var(--octofit-text);
-  --bs-primary: var(--octofit-steel);
-  --bs-primary-rgb: 70, 130, 180;
-  --bs-link-color: var(--octofit-steel-dark);
-  --bs-link-color-rgb: 58, 109, 153;
-  --bs-link-hover-color: var(--octofit-navy);
-  --bs-link-hover-color-rgb: 11, 46, 111;
+  --octofit-orb-1: #ff9ec7;
+  --octofit-orb-2: #8fcbff;
+  --octofit-orb-3: #a8ecb9;
+  --octofit-orb-4: #c4b2ff;
+  --octofit-base: #eef3ff;
+  --octofit-title-from: #0a5fd0;
+  --octofit-title-to: #1f9d55;
+  --octofit-stripe: rgb(255 255 255 / 0.32);
+  --octofit-row-hover: rgb(0 136 255 / 0.12);
+  --octofit-rule: rgb(60 60 67 / 0.14);
+  --bs-body-color: var(--lg-fg);
+  --bs-body-color-rgb: 0, 0, 0;
 }
 
-/* Dark mode: Bootstrap swaps its own variables via data-bs-theme; these override the OctoFit ones */
-[data-bs-theme='dark'] {
-  --octofit-text: #d6e4f2;
-  --octofit-muted: #9db2c6;
-  --octofit-heading: #a9d0f2;
-  --octofit-heading-end: #8fd37a;
-  --octofit-bg-from: #0a1522;
-  --octofit-bg-via: #0f1c2c;
-  --octofit-bg-to: #10230f;
-  --octofit-table-stripe: #182a3c;
-  --octofit-table-hover: #1f3d4f;
-  --octofit-table-border: #2a4258;
-  --octofit-nav-from: #06142f;
-  --octofit-nav-to: #2c5b86;
-  --bs-body-bg: #152231;
-  --bs-body-bg-rgb: 21, 34, 49;
-  --bs-body-color: var(--octofit-text);
-  --bs-border-color: #2a4258;
-  --bs-link-color: #7fb8e6;
-  --bs-link-color-rgb: 127, 184, 230;
-  --bs-link-hover-color: #b6dcf7;
-  --bs-link-hover-color-rgb: 182, 220, 247;
-  color-scheme: dark;
-}
-
-[data-bs-theme='dark'] .btn-outline-primary {
-  --bs-btn-color: #8fc3ee;
-  --bs-btn-border-color: #5a9bd4;
-  --bs-btn-hover-color: #fff;
+[data-theme='dark'] {
+  --octofit-orb-1: #6b1d52;
+  --octofit-orb-2: #124a8c;
+  --octofit-orb-3: #0d5a43;
+  --octofit-orb-4: #43308f;
+  --octofit-base: #060914;
+  --octofit-title-from: #7fc0ff;
+  --octofit-title-to: #8fe3a5;
+  --octofit-stripe: rgb(255 255 255 / 0.05);
+  --octofit-row-hover: rgb(0 145 255 / 0.18);
+  --octofit-rule: rgb(235 235 245 / 0.14);
+  --bs-body-color-rgb: 255, 255, 255;
 }
 
 body {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--octofit-text);
   min-height: 100vh;
-  background: linear-gradient(160deg, var(--octofit-bg-from) 0%, var(--octofit-bg-via) 45%, var(--octofit-bg-to) 100%) fixed;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  color: var(--lg-fg);
+  background:
+    radial-gradient(60vmax 60vmax at 8% 4%, var(--octofit-orb-1), transparent 62%),
+    radial-gradient(55vmax 55vmax at 96% 12%, var(--octofit-orb-2), transparent 62%),
+    radial-gradient(60vmax 60vmax at 82% 100%, var(--octofit-orb-3), transparent 62%),
+    radial-gradient(50vmax 50vmax at 0% 92%, var(--octofit-orb-4), transparent 62%),
+    var(--octofit-base);
+  background-attachment: fixed;
 }
 
-/* Headings */
 h1,
 h2,
 h3,
 h4,
 h5 {
-  color: var(--octofit-heading);
+  color: var(--lg-fg);
   font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
-h1.display-5 {
-  background: linear-gradient(90deg, var(--octofit-heading), var(--octofit-heading-end));
+.lead,
+.octofit-muted {
+  color: var(--lg-fg-muted) !important;
+}
+
+a {
+  color: var(--lg-accent);
+}
+
+.octofit-title {
+  background: linear-gradient(90deg, var(--octofit-title-from), var(--octofit-title-to));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.lead,
-.text-muted {
-  color: var(--octofit-muted) !important;
+h1.octofit-title:not(.h3) {
+  font-size: clamp(2rem, 4vw + 1rem, 3.25rem);
+  line-height: 1.1;
 }
 
-/* Links */
-a {
-  text-decoration-color: rgba(70, 130, 180, 0.4);
-  text-underline-offset: 0.2em;
+/* Header and navigation */
+.octofit-shell {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
 }
 
-a:hover {
-  text-decoration-color: currentColor;
-}
-
-/* Buttons */
-.btn {
-  font-weight: 500;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-
-.btn-primary {
-  --bs-btn-bg: var(--octofit-steel);
-  --bs-btn-border-color: var(--octofit-steel);
-  --bs-btn-hover-bg: var(--octofit-steel-light);
-  --bs-btn-hover-border-color: var(--octofit-steel-light);
-  --bs-btn-active-bg: var(--octofit-steel-dark);
-  --bs-btn-active-border-color: var(--octofit-steel-dark);
-  --bs-btn-disabled-bg: var(--octofit-steel);
-  --bs-btn-disabled-border-color: var(--octofit-steel);
-  --bs-btn-focus-shadow-rgb: 70, 130, 180;
-}
-
-.btn-outline-primary {
-  --bs-btn-color: var(--octofit-steel-dark);
-  --bs-btn-border-color: var(--octofit-steel);
-  --bs-btn-hover-bg: var(--octofit-steel);
-  --bs-btn-hover-border-color: var(--octofit-steel);
-  --bs-btn-active-bg: var(--octofit-steel-dark);
-  --bs-btn-active-border-color: var(--octofit-steel-dark);
-}
-
-.btn-secondary {
-  --bs-btn-bg: #5b7186;
-  --bs-btn-border-color: #5b7186;
-  --bs-btn-hover-bg: #475a6c;
-  --bs-btn-hover-border-color: #475a6c;
-}
-
-/* Navigation */
-.octofit-navbar {
-  background: linear-gradient(90deg, var(--octofit-nav-from), var(--octofit-nav-to));
-  box-shadow: 0 4px 12px rgba(11, 46, 111, 0.25);
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.octofit-header {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
 }
 
 .octofit-brand {
   display: flex;
+  flex: 1 1 0;
   align-items: center;
   gap: 0.75rem;
-  color: #fff;
-  font-size: 1.35rem;
-  letter-spacing: 0.02em;
+  min-width: max-content;
+  color: var(--lg-fg);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
 }
 
-.octofit-brand:hover,
-.octofit-brand:focus {
-  color: #fff;
+.octofit-brand:hover {
+  color: var(--lg-fg);
 }
 
 .octofit-logo {
-  height: 48px;
   width: 48px;
+  height: 48px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid var(--octofit-green);
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgb(255 255 255 / 0.75);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.25);
 }
 
-.octofit-navbar .nav-link {
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 500;
-  border-radius: 0.375rem;
-  border-bottom: 3px solid transparent;
-  margin: 0 0.15rem;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+.octofit-theme {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: var(--lg-fg-muted);
 }
 
-.octofit-navbar .nav-link:hover,
-.octofit-navbar .nav-link:focus {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.15);
+@media (max-width: 767.98px) {
+  .octofit-header {
+    justify-content: center;
+  }
+
+  .octofit-brand,
+  .octofit-theme {
+    flex: 0 0 auto;
+  }
+
+  .octofit-header > .octofit-nav {
+    order: 3;
+  }
+
+  .octofit-brand {
+    margin-right: auto;
+  }
 }
 
-.octofit-navbar .nav-link.active {
-  color: #fff;
-  font-weight: 700;
-  background-color: rgba(255, 255, 255, 0.18);
-  border-bottom-color: var(--octofit-green);
-}
-
-/* Cards and tables */
-.octofit-card {
-  border: 0;
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-.octofit-card .card-header {
-  background-color: var(--bs-body-bg);
-  border-bottom: 3px solid var(--octofit-green);
-  padding: 1rem 1.25rem;
-}
-
-.octofit-card .table {
-  --bs-table-striped-bg: var(--octofit-table-stripe);
-  --bs-table-hover-bg: var(--octofit-table-hover);
-  --bs-table-color: var(--octofit-text);
-  border-color: var(--octofit-table-border);
-}
-
-.octofit-card .table > thead {
-  --bs-table-bg: var(--octofit-steel);
-  --bs-table-color: #fff;
-  background: linear-gradient(90deg, var(--octofit-nav-from), var(--octofit-nav-to));
-}
-
-.octofit-card .table > thead th {
-  background: transparent;
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  border-bottom: 0;
-}
-
-.octofit-feature-card {
-  border-top: 4px solid var(--octofit-green) !important;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.octofit-feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0.75rem 1.5rem rgba(11, 46, 111, 0.18) !important;
+/* Home */
+.octofit-hero > div:last-child {
+  min-width: 0;
 }
 
 .octofit-hero {
-  display: flex;
+  display: flex !important;
   align-items: center;
-  gap: 1.5rem;
-  border-left: 6px solid var(--octofit-green);
+  gap: 1.75rem;
 }
 
 .octofit-hero-logo {
-  height: 120px;
   width: 120px;
+  height: 120px;
+  flex: none;
   object-fit: cover;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(11, 46, 111, 0.25);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.28);
 }
 
 @media (max-width: 575.98px) {
@@ -258,22 +172,92 @@ a:hover {
   }
 }
 
-/* Modal */
-.modal-content {
-  border: 0;
-  border-radius: 0.75rem;
+.octofit-feature {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.octofit-feature-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  color: var(--lg-accent);
+  background: var(--lg-fill);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+
+.octofit-feature-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* List panels */
+.octofit-panel {
   overflow: hidden;
 }
 
-.modal-header {
-  background: linear-gradient(90deg, var(--octofit-nav-from), var(--octofit-nav-to));
-  border-bottom: 3px solid var(--octofit-green);
+.octofit-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--octofit-rule);
 }
 
-.modal-header .modal-title {
-  color: #fff;
+.octofit-panel-body {
+  padding: 1.25rem 1.5rem 1.5rem;
 }
 
-.modal-header .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
+.octofit-search {
+  max-width: 28rem;
+  margin-bottom: 1.25rem;
+}
+
+.octofit-alert {
+  border-radius: 16px;
+}
+
+.octofit-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--lg-fg);
+  --bs-table-striped-color: var(--lg-fg);
+  --bs-table-striped-bg: var(--octofit-stripe);
+  --bs-table-hover-color: var(--lg-fg);
+  --bs-table-hover-bg: var(--octofit-row-hover);
+  --bs-table-border-color: var(--octofit-rule);
+}
+
+.octofit-table > thead th {
+  color: var(--lg-fg-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom-width: 1px;
+}
+
+.octofit-table > tbody > tr > * {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.octofit-table > tbody > tr:last-child > * {
+  border-bottom-width: 0;
+}
+
+.octofit-sheet {
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.octofit-sheet dd {
+  overflow-wrap: anywhere;
+}
+
+.octofit-sheet dt {
+  color: var(--lg-fg-muted);
 }
