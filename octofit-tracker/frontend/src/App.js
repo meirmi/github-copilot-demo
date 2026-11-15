@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, NavLink } from 'react-router-dom';
 import Activities from './components/Activities';
 import Leaderboard from './components/Leaderboard';
@@ -19,7 +19,7 @@ const navItems = [
 function Home() {
   return (
     <div>
-      <div className="octofit-hero p-4 p-md-5 mb-4 bg-white rounded-3 shadow-sm">
+      <div className="octofit-hero p-4 p-md-5 mb-4 bg-body rounded-3 shadow-sm">
         <img src={logo} className="octofit-hero-logo" alt="" />
         <div>
           <h1 className="display-5 fw-bold">Welcome to OctoFit Tracker</h1>
@@ -47,7 +47,24 @@ function Home() {
   );
 }
 
+const THEME_KEY = 'octofit-theme';
+
+function getInitialTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === 'light' || saved === 'dark') return saved;
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 function App() {
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    localStorage.setItem(THEME_KEY, theme);
+  }, [theme]);
+
+  const isDark = theme === 'dark';
+
   return (
     <Router>
       <div className="container py-3">
@@ -75,6 +92,15 @@ function App() {
                 </li>
               ))}
             </ul>
+            <button
+              type="button"
+              className="btn btn-outline-light btn-sm ms-lg-3 mb-2 mb-lg-0"
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              aria-pressed={isDark}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDark ? '☀️ Light' : '🌙 Dark'}
+            </button>
           </div>
         </nav>
         <main className="mt-4">
